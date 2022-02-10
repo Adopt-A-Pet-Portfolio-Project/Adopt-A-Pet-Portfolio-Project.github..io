@@ -67,7 +67,7 @@ const myPetsTemplate = ()  => html`
 
 
 export function myPetsPage(ctx){
-    if(!getUserData()){
+    if(!ctx.user){
         showAlertBox('To access My Pets, you need to be logged in.');
         return;
     }

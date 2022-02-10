@@ -42,7 +42,7 @@ const watchlistTemplate = () => html`
             </section>`
 
 export function watchlistPage(ctx){
-    if(!getUserData()){
+    if(!ctx.user){
         showAlertBox('To access Watchlist, you need to be logged in.');
         return;
     }

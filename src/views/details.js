@@ -92,5 +92,6 @@ export async function detailsPage(ctx){
     const pet = await getPetById(id);
     const owner = user && user.id==pet.author.objectId;
     console.log(owner);
+    window.scrollTo(top);
     return ctx.render(detailsTemplate(pet, user, owner));
 }

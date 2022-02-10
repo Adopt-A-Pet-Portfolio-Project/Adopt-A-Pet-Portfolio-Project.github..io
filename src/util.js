@@ -98,3 +98,38 @@ export function showAlertBox(message){
 }
 
 export const spinner = () => html`<p>Please, wait &hellip;</p>`;
+
+export function loadPetList(pets) {
+
+    const petPreviewTemplate = (pet) => html`
+    <article title='Click to see details'>
+            <a href='/details/${pet.objectId}'>
+                <div class="petCard">
+                    <table>
+                        <img class="petImg"
+                            src=${pet.img.url}>
+                        <tbody>
+                            <tr>
+                                <td>Name:</td>
+                                <td>${pet.name}</td>
+                            </tr>
+                            <tr>
+                                <td>City:</td>
+                                <td>${pet.city}</td>
+                            </tr>
+                            <tr>
+                                <td>Gender:</td>
+                                <td>${pet.gender}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </a>
+    </article>`;
+
+    const petList = (pets) => html`
+    ${pets.map(petPreviewTemplate)}`;
+
+    return petList(pets);
+}

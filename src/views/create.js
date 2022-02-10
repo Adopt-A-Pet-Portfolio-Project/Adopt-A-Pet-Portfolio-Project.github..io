@@ -1,3 +1,4 @@
+import { show } from 'page';
 import { createPet } from '../api/data.js';
 import {html} from '../lib.js';
 import { showAlertBox, validatePetData } from '../util.js';
@@ -65,7 +66,11 @@ const createTemplate = (onSubmit, errors) => html`
             </section>`
 
 export function createPage(ctx){
-    ctx.switchTabs('addTab');
+    if(!ctx.user){
+        showAlertBox('To add a new pet you need to be logged in.');
+        return;
+    }
+    ctx.switchTabs('addTab');    
     return ctx.render(createTemplate(onSubmit));
 
     async function onSubmit(e){

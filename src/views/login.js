@@ -23,7 +23,7 @@ const loginTemplate = (onSubmit, errors) => html`
             </section>`;
 
 export function loginPage(ctx) {
-    if(getUserData()){
+    if(ctx.user){
         showAlertBox('You are already logged in.');
         return;
     }

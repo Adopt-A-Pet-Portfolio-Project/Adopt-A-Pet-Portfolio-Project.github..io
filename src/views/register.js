@@ -27,7 +27,7 @@ const registerTemplate = (onSubmit, errors) => html`
             </section>`;
 
 export function registerPage(ctx){
-    if(getUserData()){
+    if(ctx.user){
         showAlertBox('You are already logged in.');
         return;        
     }

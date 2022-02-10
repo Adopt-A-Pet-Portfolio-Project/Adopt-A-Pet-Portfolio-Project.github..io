@@ -24,15 +24,15 @@ function addAuthor(object) {
 //Pets queries
 
 export async function getAllPets() {
-    //    const aQuery = new Parse.Query('Pet');
-//aQuery.select(['name', 'age', 'gender', 'img', 'category', 'objectId']);
-//const results = await aQuery.find();
-//console.log(`ParseObjects found: ${JSON.stringify(results)}`);
+    //const aQuery = new Parse.Query('Pet');
+    //aQuery.select(['name', 'age', 'gender', 'img', 'category', 'objectId']);
+    //const results = await aQuery.find();
+    //console.log(`ParseObjects found: ${JSON.stringify(results)}`);
     return api.get('/classes/Pet');
 }
 
 export async function getRecentPets(){
-    const urlString = '/classes/Pet?&order=-createdAt&limit=3';
+    const urlString = '/classes/Pet?order=-createdAt&limit=3';
     console.log(urlString);
     return api.get(urlString);
 }
