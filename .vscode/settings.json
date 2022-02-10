@@ -1,4 +1,4 @@
 {
-    "liveServer.settings.file": "/",
-    "liveServer.settings.multiRootWorkspaceName": "/"
+    "liveServer.settings.file": "/index.html",
+    "liveServer.settings.multiRootWorkspaceName": "/index.html"
 }
