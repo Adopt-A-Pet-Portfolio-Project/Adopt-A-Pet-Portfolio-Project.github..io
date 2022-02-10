@@ -1,0 +1,61 @@
+.petListContainer {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+}
+
+.petListContainer article {
+    display:inline-block;
+    width: 30%;
+    margin: 10px;
+    border-color: rgb(42, 62, 62);
+    border-style: outset;
+    box-shadow: 5px 5px 9px rosybrown;
+}
+
+.petListContainer article a {
+    text-decoration: none;
+    color: rgb(114 22 56);
+}
+
+.petListContainer article:hover {
+    opacity: 0.7;
+}
+
+.petListContainer .petCard {
+    padding: 7px;
+    background-color: rgb(199, 197, 197);
+}
+
+.petCard img {
+    width: 100%;
+    height: 234px;
+    object-fit: cover;
+}
+
+#petListChoice {
+    width: 100%;
+    margin-top: 15px;
+    text-align: center;
+    background-color: rosybrown;
+    opacity: 0.9;
+}
+
+#petListChoice input {
+    display:inline-block;
+    padding: 0;
+    margin: 0;
+}
+#petListChoice label {
+    display:inline-block;
+    padding: 0;
+    margin: 0;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+
+

@@ -1,0 +1,13 @@
+footer {
+    position: relative;   
+    bottom: 0;
+    width:inherit;
+    color: rosybrown;
+    text-align: center;
+    
+}
+
+footer p {
+    font-size: 14px;
+    background-color: #333333
+}

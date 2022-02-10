@@ -1,0 +1,100 @@
+#site_header {
+    height: 150px;
+    display:block;
+}
+#site_header article {
+   display: block;
+   float: left;
+   padding-left: 10px;
+   padding-top: 20px;
+   padding-bottom: 0px;
+   width: 70%;
+}
+
+#site_header article a, i {
+    font-family: 'Paytone One', sans-serif;
+    color: purple;
+    font-size: 42px;
+    border-radius: 5px;
+    padding: 5px;
+}
+#site_header article a:hover{
+    color:#333333;
+    background-color: rosybrown;
+}
+
+#site_header article p {
+    width:inherit;
+    position:relative;
+    padding-top: 15px;
+    margin-bottom: 0px;
+    font-family: 'Courgette', cursive;
+    text-shadow: 2px 2px 5px palevioletred
+}
+#header_img {
+    display: block;
+    float: right;
+    width: 30%;
+    height: inherit;
+ }
+
+ header section.headerSection {
+     display: block;
+ }
+
+ /* Style the navigation bar */
+
+ .navbar {
+    background-color: #333;
+    display: block;
+}
+
+.navbar div#user {
+    display: none;
+}
+.navbar div#user span {
+    color:lightgrey;
+}
+
+/* Style the links inside the navigation bar */
+
+nav a, nav span {
+    display:inline-block;
+    color: rosybrown;
+    text-align: center;
+    padding: 14px 12px;
+    text-decoration: none;
+    font-size: 19px;
+    border-radius: 5px;
+}
+
+nav div {
+    float: right;
+}
+
+/* Change the color of links on hover */
+
+nav a:hover {
+    background-color: rosybrown;
+    color: #333;
+}
+
+/* Add a color to the active/current link */
+
+nav a.active {
+    background-color: rosybrown;
+    color: #333;
+}
+
+#logoutBtn.clicked {
+    pointer-events: none;
+}
+
+a.activeTab {
+    background-color: rosybrown;
+    color: #333;
+}
+
+
+
+

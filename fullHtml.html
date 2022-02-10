@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Adopt A Pet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Paytone+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="https://kit.fontawesome.com/f65dfb3a7c.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+    <script type="module" src="src/parseSdk.js" type="module"></script>    
+    <script src="src/app.js" type="module"></script>
+</head>
+
+<body>
+    <div id="container">
+
+        <header>
+            <section class="headerSection">
+                <div id="site_header">
+                    <article>
+                        <i class="fas fa-paw"></i>
+                        <a href='/'>Adopt A Pet</a>
+                        <p>Adopting one animal will not change the world, but for that animal the world will change.</p>
+
+                    </article>
+                    <img id="header_img"
+                        src="https://media.istockphoto.com/photos/group-of-pets-posing-around-a-border-collie-dog-cat-ferret-rabbit-picture-id1296353202?k=20&m=1296353202&s=612x612&w=0&h=-J5RllK3gwzLCkYbLUUPHmGuMxpneC7cfkAKFpfNfuk=">
+                </div>
+            </section>
+            <hr>
+            <section class="headerSection">
+                <!-- Navigation -->
+                <nav class="navbar">
+                    <section class="navbarSection">
+                        <a href="/all">All pets</a>
+                        <a href="/search">Find a pet</a>
+                        <!-- Guest users -->
+                        <div id="guest">
+                            <a href="/login">Login</a>
+                            <a href="/register">Register</a>
+                        </div>
+                        <!-- Logged-in users -->
+                        <div id="user">
+                            <span>Welcome, {username}</span>
+                            <a href="/watchlist">Watch list</a>
+                            <a href="/myPets">My pets</a>
+                            <a href="/add">Add</a>
+                            <a id="logoutBtn" href="javascript:void(0)">Logout</a>
+                        </div>
+                    </section>
+
+                </nav>
+            </section>
+        </header>
+
+        <main>
+            <section id="home">
+
+                <div class="pageTitle">
+                    <h1>Welcome to Adopt A Pet!</h1>
+                </div>
+                <hr>
+                <div id="homeScreen">
+                    <section class="homeSection" id="mission">
+                        <h2>Our mission</h1>
+                            <p> Connecting animals in need of home with homes in need of animals.</P>
+                    </section>
+                    <section class="homeSection" id="recent">
+                        <h2>Most recent animals</h2>
+                        <div id="recentPetsWindow">
+                            <article class="petPreview" title='Click to see details'>
+                                <a href='#'>
+                                    <div>
+                                        <table>
+                                            <img class="petImg"
+                                                src='https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/chocolate-border-collie-warren-photographic.jpg'>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Name:</td>
+                                                    <td>Sharo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>City:</td>
+                                                    <td>Varna</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Gender:</td>
+                                                    <td>Male</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </a>
+                            </article>
+                            <article class="petPreview" title='Click to see details'>
+                                <a href='#'>
+                                    <div>
+                                        <table>
+                                            <img class="petImg"
+                                                src='https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/chocolate-border-collie-warren-photographic.jpg'>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Name:</td>
+                                                    <td>hristofor columbus</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>City:</td>
+                                                    <td>Varna</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Gender:</td>
+                                                    <td>Male</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </a>
+                            </article>
+                            <article class="petPreview" title='Click to see details'>
+                                <a href='#'>
+                                    <div>
+                                        <table>
+                                            <img class="petImg"
+                                                src='https://parsefiles.back4app.com/k9Up56EAJCdKbIfGfka2tvE6MrhMs6GWJDjsww3H/4078e1a28d379a3b2b5da7861bec302b_vayabeach.jpg'>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Name:</td>
+                                                    <td>Sharo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>City:</td>
+                                                    <td>Varna</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Gender:</td>
+                                                    <td>Male</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </a>
+                            </article>
+                        </div>
+
+                        <a class="button" id="seeAllBtn" href="/all">See all</a>
+                    </section>
+                </div>
+                <hr>
+                <div class="notSigned">
+                    <h4>To access your watch list or add a new animal, please
+                        <a href="/login">login</a> to your account or <a href="/register">register.</a>
+                    </h4>
+                </div>
+            </section>
+
+            <section id="login">
+                <div class="pageTitle">
+                    <h1>Login</h1>
+                </div>
+                <hr>
+                <article>
+                    <form id="loginForm">
+                        <label>E-mail: <input type="text" name="email"></label>
+                        <label>Password: <input type="password" name="password"></label>
+                        <input class="button" type="submit" value="Login">
+                    </form>
+                </article>
+                <div class="notSigned">
+                    <h4>Don't have a profile yet? Click <a href="/register">here</a> to register.</h4>
+                </div>
+            </section>
+
+            <section id="register">
+                <div class="pageTitle">
+                    <h1>Register</h1>
+                </div>
+                <hr>
+                <article>
+                    <form id="registerForm">
+                        <label>Username: <input type="text" name="username"></label>
+                        <label>E-mail: <input type="text" name="email"></label>
+                        <label>Password: <input type="password" name="password"></label>
+                        <label>Repeat: <input type="password" name="rePass"></label>
+                        <input class="button" type="submit" value="Register">
+                    </form>
+                </article>
+                <div class="notSigned">
+                    <h4>Already have a profile? Click <a href="/login">here</a> to login.</h4>
+                </div>
+            </section>
+
+            <section id="all">
+                <div class="pageTitle">
+                    <h1>All pets</h1>
+                </div>
+                <hr>
+                <div id="petListChoice">
+                    <input type="radio" id="all" name="choice" value="all" checked="true">
+                    <label for="all">All</label>
+
+                    <input type="radio" id="dogs" name="choice" value="dog">
+                    <label for="dogs">Dogs</label>
+
+                    <input type="radio" id="cats" name="choice" value="cat">
+                    <label for="cats">Cats</label>
+
+                    <input type="radio" id="others" name="choice" value="other">
+                    <label for="others">Others</label>
+                </div>
+                <div class="petListContainer">
+                    <article title='Click to see details'>
+                        <a href='#'>
+                            <div class="petCard">
+                                <table>
+                                    <img class="petImg"
+                                        src='https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/chocolate-border-collie-warren-photographic.jpg'>
+                                    <tbody>
+                                        <tr>
+                                            <td>Name:</td>
+                                            <td>Sharo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>City:</td>
+                                            <td>Varna</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gender:</td>
+                                            <td>Male</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </a>
+                    </article>
+                    <article title='Click to see details'>
+                        <a href='#'>
+                            <div class="petCard">
+                                <table>
+                                    <img class="petImg"
+                                        src='https://parsefiles.back4app.com/k9Up56EAJCdKbIfGfka2tvE6MrhMs6GWJDjsww3H/4078e1a28d379a3b2b5da7861bec302b_vayabeach.jpg'>
+                                    <tbody>
+                                        <tr>
+                                            <td>Name:</td>
+                                            <td>Sharo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>City:</td>
+                                            <td>Varna</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gender:</td>
+                                            <td>Male</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </a>
+                    </article>
+                    <article title='Click to see details'>
+                        <a href='#'>
+                            <div class="petCard">
+                                <table>
+                                    <img class="petImg"
+                                        src='https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/chocolate-border-collie-warren-photographic.jpg'>
+                                    <tbody>
+                                        <tr>
+                                            <td>Name:</td>
+                                            <td>Sharo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>City:</td>
+                                            <td>Varna</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gender:</td>
+                                            <td>Male</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </a>
+                    </article>
+                    <article title='Click to see details'>
+                        <a href='#'>
+                            <div class="petCard">
+                                <table>
+                                    <img class="petImg"
+                                        src='https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/chocolate-border-collie-warren-photographic.jpg'>
+                                    <tbody>
+                                        <tr>
+                                            <td>Name:</td>
+                                            <td>Sharo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>City:</td>
+                                            <td>Varna</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gender:</td>
+                                            <td>Male</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+                <hr>
+            </section>
+
+            <section id="details">
+                <div class="pageTitle">
+                    <h1>Details</h1>
+                </div>
+                <hr>
+                <h2>
+                    Hi, my name is {NAME} and I can't wait to meet you!
+                </h2>
+                <div id="petDetails">
+                    <article>
+                        <div id="petDetailsImg">
+                            <img
+                                src='https://my-petdoctor.com/wp-content/uploads/2017/01/bigstock-Cat-In-A-Grass-48778532.jpg'>
+                            <a title="Add to Watch List" id="addToWatchList" href="#"><i class="fas fa-eye"></i></a>
+                            <a title="Remove from Watch List" id="removeFromWatchList" href="#"><i
+                                    class="fas fa-eye-slash"></i></a>
+                        </div>
+                    </article>
+                    <article id="petDetailsInfo">
+
+                        <h5>
+                            Here is some more information to help you get to know me better.
+                        </h5>
+                        <div>
+                            <span><i class="fas fa-venus-mars"></i> Male</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Varna</span>
+                        </div>
+                        <div>
+                            <span>Age: 2y</span>
+                            <span>Weight: 1,5kg</span>
+                        </div>
+                        <div>
+                            <span>Vaccinated: Yes</span>
+                            <span>Neutered: No</span>
+                        </div>
+                        <div>
+                            <span title="Show pnone number"><i class="fas fa-phone-square-alt"></i> Ask about me:</span>
+                            <span id="phoneNumber">0885642398</span>
+                        </div>
+                    </article>
+                </div>
+                <div id="petStory">
+                    <p>This is the story of this pet that has been abandoned by its owners and found nearly frozen to
+                        death. After a few days in the clinic it got to its senses and now is ready to find a new home.
+                        It is very friendly both with cats and dogs and it is always ready to play. A house with a yard
+                        would be the perfect option.</p>
+                </div>
+
+                <div id="ownerButtons">
+                    <a class="button" id="editBtn" href="#">Edit</a>
+                    <a class="button" id="removeBtn" href="#">Remove</a>
+                    <a class="button" id="adoptBtn" href="#">Adopted</a>
+                </div>
+
+                <h2>
+                    Comments
+                </h2>
+                <div id="comments">
+                    <div class="comment">
+                        <h5 class="commentAuthor">Username</h5>
+                        <p class="date">25/01/2020</p>
+                        <p class="commentText">Is there any information about the parents?</p>
+                    </div>
+                    <div class="comment">
+                        <h5 class="commentAuthor">Other guy</h5>
+                        <p class="date">25/01/2020</p>
+                        <p class="commentText">Only about the mother. She is german shepherd.</p>
+                    </div>
+                    <div class="noContent">There are no comments about this pet.</div>
+
+                    <div>
+                        <form id="newComment">
+                            <textarea name="commentText" placeholder="Type your comment here"></textarea>
+                            <input type="submit" class="button" value="Add comment">
+                        </form>
+                    </div>
+                    <div class="notSigned">
+                        <h4>To add a comment about this pet, please
+                            <a href="/login">login</a> to your account or <a href="/register">register.</a>
+                        </h4>
+                    </div>
+                </div>
+
+            </section>
+
+            <section id="myPets">
+                <div class="pageTitle">
+                    <h1>My Pets</h1>
+                </div>
+                <hr>
+
+                <div class="noContent">You haven't got any pets listed for adoption.</div>
+
+                <div id="addBtnDiv"><a class="button" href="/create">Add new</a></div>
+                <div class="petListContainer">
+                    <article title='Click to see details'>
+                        <a href='#'>
+                            <div class="petCard">
+                                <table>
+                                    <img class="petImg"
+                                        src='https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/chocolate-border-collie-warren-photographic.jpg'>
+                                    <tbody>
+                                        <tr>
+                                            <td>Name:</td>
+                                            <td>Sharo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>City:</td>
+                                            <td>Varna</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gender:</td>
+                                            <td>Male</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </a>
+                    </article>
+                    <article title='Click to see details'>
+                        <a href='#'>
+                            <div class="petCard">
+                                <table>
+                                    <img class="petImg"
+                                        src='https://parsefiles.back4app.com/k9Up56EAJCdKbIfGfka2tvE6MrhMs6GWJDjsww3H/4078e1a28d379a3b2b5da7861bec302b_vayabeach.jpg'>
+                                    <tbody>
+                                        <tr>
+                                            <td>Name:</td>
+                                            <td>Sharo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>City:</td>
+                                            <td>Varna</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gender:</td>
+                                            <td>Male</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+            </section>
+
+            <section id="watchList">
+                <div class="pageTitle">
+                    <h1>My Watch List</h1>
+                </div>
+                <hr>
+
+                <div class="noContent">You haven't added any pets to your list yet. <a href="/search">Search</a> for a
+                    pet that suits your preferences.
+                </div>
+
+                <div class="petListContainer">
+                    <article title='Click to see details'>
+                        <a href='#'>
+                            <div class="petCard">
+                                <table>
+                                    <img class="petImg"
+                                        src='https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/chocolate-border-collie-warren-photographic.jpg'>
+                                    <tbody>
+                                        <tr>
+                                            <td>Name:</td>
+                                            <td>Sharo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>City:</td>
+                                            <td>Varna</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gender:</td>
+                                            <td>Male</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+            </section>
+
+            <section id="create">
+                <div class="pageTitle">
+                    <h1>Add A Pet For Adoption</h1>
+                </div>
+                <hr>
+
+                <form id="createForm">
+                    <label>Name: <input type="text" name="name" placeholder="Pet name"></label>
+                    <label>Image: <input type="file" name="img" placeholder="Image URL"></label>
+                    <label>Age: <input type="text" id="ageField" name="age">
+                        <select id="ageUnit">
+                            <option value="days">Years</option>
+                            <option value="months">Months</option>
+                            <option value="years">Days</option>
+                        </select>
+                    </label>
+                    <label>Weight: <input type="text" id="weightField" name="weight">
+                        <select id="weightUnit">
+                            <option value="gr">kg</option>
+                            <option value="kg">gr</option>
+                        </select>
+                    </label>
+                    <label>Gender: <fieldset class="formRadioBtns">
+                            <input type="radio" id="male" name="gender" value="Male" checked="true"><span> Male</span>
+                            <input type="radio" id="female" name="gender" value="Female"><span> Female</span>
+                        </fieldset>
+                    </label>
+                    <label>Vaccinated: <fieldset class="formRadioBtns">
+                            <input type="radio" name="vaccinated" value="true" checked="true"><span> Yes</span>
+                            <input type="radio" name="vaccinated" value="false"><span> No</span>
+                        </fieldset>
+                    </label>
+                    <label>Neutered: <fieldset class="formRadioBtns">
+                            <input type="radio" name="neutered" value="true" checked="true"><span> Yes</span>
+                            <input type="radio" name="neutered" value="false"><span> No</span>
+                        </fieldset>
+                    </label>
+                    <label>City: <input type="text" name="city"
+                            placeholder="Enter the current location of the pet"></label>
+
+                    <label>Category: <fieldset class="formRadioBtns">
+                            <input type="radio" name="category" value="dog" checked="true"><span> Dog</span>
+                            <input type="radio" name="category" value="cat"><span> Cat</span>
+                            <input type="radio" name="category" value="other"><span> Other</span>
+                        </fieldset>
+                    </label>
+                    <label class="ml">Story: <textarea name="description"
+                            placeholder="Shortly share the pet's story and add any additional information that might be important."></textarea></label>
+                    <input class="button" type="submit" value="Add pet">
+                </form>
+            </section>
+
+            <section id="edit">
+                <div class="pageTitle">
+                    <h1>Edit Pet Information</h1>
+                </div>
+                <hr>
+
+                <form id="editForm">
+                    <label>Name: <input type="text" name="name" placeholder="Pet name"></label>
+                    <label>Image: <input type="file" name="img" placeholder="Image URL"></label>
+                    <label>Age: <input type="text" id="ageField" name="age">
+                        <select id="ageUnit">
+                            <option value="days">Years</option>
+                            <option value="months">Months</option>
+                            <option value="years">Days</option>
+                        </select>
+                    </label>
+                    <label>Weight: <input type="text" id="weightField" name="weight">
+                        <select id="weightUnit">
+                            <option value="gr">kg</option>
+                            <option value="kg">gr</option>
+                        </select>
+                    </label>
+                    <label>Gender: <fieldset class="formRadioBtns">
+                            <input type="radio" name="gender" value="Male" checked="true"><span> Male</span>
+                            <input type="radio" name="gender" value="Female"><span> Female</span>
+                        </fieldset>
+                    </label>
+                    <label>Vaccinated: <fieldset class="formRadioBtns">
+                            <input type="radio" name="vaccinated" value="true" checked="true"><span> Yes</span>
+                            <input type="radio" name="vaccinated" value="false"><span> No</span>
+                        </fieldset>
+                    </label>
+                    <label>Neutered: <fieldset class="formRadioBtns">
+                            <input type="radio" name="neutered" value="true" checked="true"><span> Yes</span>
+                            <input type="radio" name="neutered" value="false"><span> No</span>
+                        </fieldset>
+                    </label>
+                    <label>City: <input type="text" name="city"
+                            placeholder="Enter the current location of the pet"></label>
+
+                    <label>Category: <fieldset class="formRadioBtns">
+                            <input type="radio" name="category" value="dog" checked="true"><span> Dog</span>
+                            <input type="radio" name="category" value="cat"><span> Cat</span>
+                            <input type="radio" name="category" value="other"><span> Other</span>
+                        </fieldset>
+                    </label>
+                    <label class="ml">Story: <textarea name="description"
+                            placeholder="Shortly share the pet's story and add any additional information that might be important."></textarea></label>
+                    <input class="button" type="submit" value="Update">
+                </form>
+
+                <hr>
+            </section>
+
+            <section id="search">
+                <div class="pageTitle">
+                    <h1>Search</h1>
+                </div>
+                <hr>
+                <h2>Find the perfect pet for you!</h2>
+
+                <div id="searchField">
+                    <input name="searchCity" type="text" placeholder="Type a city">
+                    <a class="button" href="javascript:void(0)"><i class="fas fa-search"></i></a>
+                </div>
+                <div id="searchRadioBtns">
+                        <input type="radio" name="category" value="dog"><span> Dog</span>
+                        <input type="radio" name="category" value="cat"><span> Cat</span>
+                        <input type="radio" name="category" value="other"><span> Other</span>
+
+                            <input type="radio" name="gender" value="Male"><span> Male</span>
+                            <input type="radio" name="gender" value="Female"><span> Female</span>
+                </div>
+                <div id="searchResults">
+
+                    <div class="noContent">There are no results to match your preferences.
+                    </div>
+
+                    <div class="petListContainer">
+                        <article title='Click to see details'>
+                            <a href='#'>
+                                <div class="petCard">
+                                    <table>
+                                        <img class="petImg"
+                                            src='https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/chocolate-border-collie-warren-photographic.jpg'>
+                                        <tbody>
+                                            <tr>
+                                                <td>Name:</td>
+                                                <td>Sharo</td>
+                                            </tr>
+                                            <tr>
+                                                <td>City:</td>
+                                                <td>Varna</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gender:</td>
+                                                <td>Male</td>
+                                            </tr>
+    
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer class="footer">
+            <hr>
+            <p>Adopt A Pet portfolio project #1</p>
+        </footer>
+    </div>
+</body>
+
+</html>

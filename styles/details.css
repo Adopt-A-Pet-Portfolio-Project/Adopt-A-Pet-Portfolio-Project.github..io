@@ -1,0 +1,148 @@
+#details h2 {
+    text-align: left;
+    padding-left: 20px;
+    margin-top: 20px;
+    font-size: 20pt;
+}
+
+#petDetails {
+    display: flex;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    margin-right: 10px;
+}
+#petDetails article {
+ display: grid;
+ width: 45%;
+ margin-left: auto;
+ margin-right: auto;
+ margin-top:20px;
+ margin-bottom:10px;
+}
+
+#petDetailsImg {
+    padding: 10px;
+    padding-bottom: 0;
+    box-shadow: 5px 5px 9px rosybrown;
+}
+
+#petDetailsImg img {
+    width:100%;
+    max-height:355px;
+    object-fit: cover;
+}
+
+#petDetailsImg .fas {
+    padding: 0;
+    font-size: xx-large;
+    padding-left: 5px;
+}
+
+#petDetailsImg .fas:active {
+    background-color:rgb(199, 197, 197);
+}
+
+#petDetailsInfo div {
+    width: 100%;
+    margin-bottom: 12px;
+    padding-left: 4px;
+    padding-top: 8px;
+    box-shadow: 5px 5px 9px rosybrown;
+}
+
+#petDetailsInfo div span {
+    color: #333;
+    display:inline-block;
+    width: 45%;
+    font-size: 15pt;
+}
+
+#petDetailsInfo div span .fas {
+    font-size: larger;
+    color:#333;
+}
+
+#petStory {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 28px;
+    padding-right: 25px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+#petStory p{
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left:12px;
+    padding-right: 12px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 15pt;
+    font-weight: bold;
+    text-align: justify;
+    text-indent: 15px;
+    border-color: rgb(48, 24, 24);
+    border-style: outset;
+    border-width: 3px;
+    background-color: rgb(199, 197, 197);
+    opacity: 0.7;
+    box-shadow: 5px 5px 9px rosybrown;
+}
+#comments {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 40px;
+    padding-left: 28px;
+    padding-right: 25px;
+
+}
+
+.comment {
+    margin-bottom: 20px;
+}
+
+.commentAuthor {
+    margin-left:15px;
+    font-size:12pt;
+    color: rgb(122, 62, 62);
+}
+
+.date {
+    margin-left: 15px;
+    font-size: 9pt;
+}
+
+.commentText {
+    background-color: snow;
+    padding: 15px;
+    font-size: 14pt;
+    border-style: outset;
+    border-radius: 15px;
+}
+
+#newComment {
+    border-style: outset;
+    border-radius: 15px;
+}
+
+#newComment textarea{
+    width:100%;
+    margin-bottom:18px;
+    background-color: snow;
+    padding: 15px;
+    font-size: 14pt;
+    border-style: outset;
+    border-radius: 15px;
+}
+
+
+
+#ownerButtons {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#removeBtn {
+    margin-left:25px;
+    margin-right: 25px;;
+}
