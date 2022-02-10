@@ -90,7 +90,7 @@ export async function detailsPage(ctx){
     const id = ctx.params.id;
     const user = ctx.user;
     const pet = await getPetById(id);
-    const owner = user.id==pet.author.objectId;
+    const owner = user && user.id==pet.author.objectId;
     console.log(owner);
     return ctx.render(detailsTemplate(pet, user, owner));
 }
