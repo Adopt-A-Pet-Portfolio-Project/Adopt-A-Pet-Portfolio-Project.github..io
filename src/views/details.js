@@ -87,6 +87,7 @@ const detailsTemplate = (pet, user, owner) => html`
             </section>`
 
 export async function detailsPage(ctx){
+    ctx.switchTabs('details');
     const id = ctx.params.id;
     const user = ctx.user;
     const pet = await getPetById(id);

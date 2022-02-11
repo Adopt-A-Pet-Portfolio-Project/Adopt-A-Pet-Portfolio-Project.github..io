@@ -133,3 +133,19 @@ export function loadPetList(pets) {
 
     return petList(pets);
 }
+
+export function buildQueryString(city, category, gender){
+    
+    const queryObject = {};
+    if(city!=''){
+        queryObject.city = {"$regex": "(?i)"+city};
+    }
+    if(category!=null){
+        queryObject.category = category.value;
+    }
+    if(gender!=null){
+        queryObject.gender = gender.value;
+    }
+    console.log(queryObject);
+    return JSON.stringify(queryObject);    
+}

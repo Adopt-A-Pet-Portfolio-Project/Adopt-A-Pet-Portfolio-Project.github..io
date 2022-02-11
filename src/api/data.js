@@ -1,4 +1,4 @@
-import { getUserData } from '../util.js';
+import { buildQueryString, getUserData } from '../util.js';
 import * as api from './api.js';
 
 export const login = api.login;
@@ -39,6 +39,12 @@ export async function getRecentPets(){
 
 export async function getPetById(id) {
     return api.get('/classes/Pet/' + id);
+}
+
+export async function getPetsFromSearch(city, category, gender){
+    const query = encodeURIComponent(buildQueryString(city, category, gender));
+    console.log(query);
+    return api.get('/classes/Pet?where=' + query);
 }
 
 export async function createPet(pet) {

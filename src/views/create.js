@@ -1,4 +1,3 @@
-import { show } from 'page';
 import { createPet } from '../api/data.js';
 import {html} from '../lib.js';
 import { showAlertBox, validatePetData } from '../util.js';
