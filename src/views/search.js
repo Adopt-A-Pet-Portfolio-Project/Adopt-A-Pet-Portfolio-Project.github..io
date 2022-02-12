@@ -35,7 +35,11 @@ const searchResultsTemplate = (searchResults) => html`
             <div class="noContent">
                 There are no results that match your preferences.
             </div>` 
-        : html`<div class="petListContainer">
+        : html`
+            <div class="noContent">
+                ${searchResults.results.length} pets found.
+            </div>
+            <div class="petListContainer">
             ${loadPetList(searchResults.results)}
             </div>`}`;
 
