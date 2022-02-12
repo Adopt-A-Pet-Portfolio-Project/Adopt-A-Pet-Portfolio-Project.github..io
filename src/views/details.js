@@ -1,7 +1,7 @@
-import { getPetById } from '../api/data.js';
+import { addWatchItem, deleteWatchItem, getPetById, getWatchedItem } from '../api/data.js';
 import { html} from '../lib.js';
 
-const detailsTemplate = (pet, user, owner) => html`
+const detailsTemplate = (pet, user, owner, watched, onClickWatch) => html`
     <section id="details">
                 <div class="pageTitle">
                     <h1>Details</h1>
@@ -16,9 +16,14 @@ const detailsTemplate = (pet, user, owner) => html`
                             <a href=${pet.img.url}>
                                 <img src=${pet.img.url}>
                             </a>
-                            <a title="Add to Watch List" id="addToWatchList" href="#"><i class="fas fa-eye"></i></a>
-                            <a title="Remove from Watch List" id="removeFromWatchList" href="#"><i
-                                    class="fas fa-eye-slash"></i></a>
+                            ${owner || !user
+                                ? '' 
+                                : html`
+                                    <a @click=${onClickWatch} style="display:${watched ? "block" : "none"}" title="Remove from Watch List" id="removeFromWatchList" href="#">
+                                    <i class="fas fa-eye-slash"></i></a>
+                                    <a @click=${onClickWatch} style="display:${watched ? "none" : "block"}" title="Add to Watch List" id="addToWatchList" href="#">
+                                    <i class="fas fa-eye"></i></a>
+                                `}                            
                         </div>
                     </article>
                     <article id="petDetailsInfo">
@@ -91,8 +96,37 @@ export async function detailsPage(ctx){
     const id = ctx.params.id;
     const user = ctx.user;
     const pet = await getPetById(id);
-    const owner = user && user.id==pet.author.objectId;
-    console.log(owner);
+    let owner = false;
+    let watched = false;
+    let watchedItem = null;
+    let watchedId = null;
+    if(user){
+        owner = user.id==pet.author.objectId;
+        watchedItem = await getWatchedItem(user.id, id);
+        watched = watchedItem.results.length!=0;
+        
+    }
+    
     window.scrollTo(top);
-    return ctx.render(detailsTemplate(pet, user, owner));
+    return ctx.render(detailsTemplate(pet, user, owner, watched, onClickWatch));
+
+    async function onClickWatch(e){
+        e.preventDefault()
+        const target = e.target.parentNode;
+        if(target.id == 'addToWatchList'){
+            await addWatchItem(user.id, pet.objectId);
+            watched=true;
+            target.style.display = 'none';
+            const otherEl = document.getElementById('removeFromWatchList');
+            otherEl.style.display = 'block';
+        }
+        if(target.id == 'removeFromWatchList'){
+            const itemToDelete = await getWatchedItem(user.id, id);
+            await deleteWatchItem(itemToDelete.results[0].objectId);
+            watched = false;
+            target.style.display = 'none';
+            const otherEl = document.getElementById('addToWatchList');
+            otherEl.style.display = 'block';
+        }
+    }
 }

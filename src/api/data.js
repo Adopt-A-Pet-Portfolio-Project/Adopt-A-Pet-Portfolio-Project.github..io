@@ -88,3 +88,23 @@ export async function deletePet(id) {
     return api.del('/classes/Pet/' + id);
 }
 
+
+// Watch Items queries //
+
+export async function addWatchItem(userId, petId){
+    const newItem = {
+        userId,
+        petId
+    };
+    return api.post('/classes/WatchListItem', newItem);
+}
+
+
+export async function getWatchedItem(userId, petId){
+    const query = encodeURIComponent(JSON.stringify({userId, petId}));
+    return api.get('/classes/WatchListItem?where=' + query);
+}
+
+export async function deleteWatchItem(id){
+    return api.del('/classes/WatchListItem/'+id);
+}

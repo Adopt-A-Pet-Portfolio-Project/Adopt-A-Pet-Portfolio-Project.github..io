@@ -62,7 +62,6 @@ export function searchPage(ctx){
     };
 
     function toggleBtn(e){
-        console.log(e.target.checked);
         
         if(e.target.checked){
             e.target.addEventListener('click', onClickToggle);            
