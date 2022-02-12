@@ -1,4 +1,4 @@
-import { buildQueryString, getUserData } from '../util.js';
+import { buildSearchQuery, buildAuthorQuery, getUserData } from '../util.js';
 import * as api from './api.js';
 
 export const login = api.login;
@@ -33,17 +33,22 @@ export async function getAllPets() {
 
 export async function getRecentPets(){
     const urlString = '/classes/Pet?order=-createdAt&limit=3';
-    console.log(urlString);
     return api.get(urlString);
 }
 
 export async function getPetById(id) {
     return api.get('/classes/Pet/' + id);
 }
+export async function getPetsByAuthor(userId){
+    const author = {
+        author: createPointer('_User', userId)
+    };
+    const query = buildAuthorQuery(author);
+    return api.get('/classes/Pet?where=' + query + '&keys='+encodeURIComponent(JSON.stringify('name,age,gender,img,city,objectId')));
+}
 
 export async function getPetsFromSearch(city, category, gender){
-    const query = encodeURIComponent(buildQueryString(city, category, gender));
-    console.log(query);
+    const query = encodeURIComponent(buildSearchQuery(city, category, gender));
     return api.get('/classes/Pet?where=' + query);
 }
 

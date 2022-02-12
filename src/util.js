@@ -134,7 +134,7 @@ export function loadPetList(pets) {
     return petList(pets);
 }
 
-export function buildQueryString(city, category, gender){
+export function buildSearchQuery(city, category, gender){
     
     const queryObject = {};
     if(city!=''){
@@ -148,4 +148,8 @@ export function buildQueryString(city, category, gender){
     }
     console.log(queryObject);
     return JSON.stringify(queryObject);    
+}
+
+export function buildAuthorQuery(author){
+    return encodeURIComponent(JSON.stringify(author));
 }
