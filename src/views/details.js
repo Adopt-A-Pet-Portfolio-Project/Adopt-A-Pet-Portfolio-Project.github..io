@@ -19,9 +19,9 @@ const detailsTemplate = (pet, user, owner, watched, onClickWatch) => html`
                             ${owner || !user
                                 ? '' 
                                 : html`
-                                    <a @click=${onClickWatch} style="display:${watched ? "block" : "none"}" title="Remove from Watch List" id="removeFromWatchList" href="#">
+                                    <a @click=${onClickWatch} style="display:${watched ? "block" : "none"}" title="Remove from Watch List" id="removeFromWatchList" href="javascript:void(0)">
                                     <i class="fas fa-eye-slash"></i></a>
-                                    <a @click=${onClickWatch} style="display:${watched ? "none" : "block"}" title="Add to Watch List" id="addToWatchList" href="#">
+                                    <a @click=${onClickWatch} style="display:${watched ? "none" : "block"}" title="Add to Watch List" id="addToWatchList" href="javascript:void(0)">
                                     <i class="fas fa-eye"></i></a>
                                 `}                            
                         </div>
@@ -113,9 +113,10 @@ export async function detailsPage(ctx){
     async function onClickWatch(e){
         e.preventDefault()
         const target = e.target.parentNode;
+        target.classList.add('disableClick');
         if(target.id == 'addToWatchList'){
             await addWatchItem(user.id, pet.objectId);
-            watched=true;
+            watched = true;
             target.style.display = 'none';
             const otherEl = document.getElementById('removeFromWatchList');
             otherEl.style.display = 'block';
@@ -128,5 +129,6 @@ export async function detailsPage(ctx){
             const otherEl = document.getElementById('addToWatchList');
             otherEl.style.display = 'block';
         }
+        target.classList.remove('disableClick');
     }
 }
