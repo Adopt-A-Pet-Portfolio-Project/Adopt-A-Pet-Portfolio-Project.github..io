@@ -88,8 +88,23 @@ export async function deletePet(id) {
     return api.del('/classes/Pet/' + id);
 }
 
+export async function getWatchedPets(ids){
+    const obj = {
+        objectId: {
+            "$in": ids
+        }
+    }
+    const query = encodeURIComponent(JSON.stringify(obj));
+    return api.get('/classes/Pet?where=' + query);
+}
+
 
 // Watch Items queries //
+
+export async function getWatchlistIds(userId){
+    const query = encodeURIComponent(JSON.stringify({userId}));
+    return api.get('/classes/WatchListItem?where=' + query);
+}
 
 export async function addWatchItem(userId, petId){
     const newItem = {
