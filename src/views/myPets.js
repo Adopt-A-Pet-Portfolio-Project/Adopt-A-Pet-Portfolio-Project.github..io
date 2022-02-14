@@ -1,6 +1,6 @@
 import { getPetsByAuthor } from '../api/data.js';
 import { html, until} from '../lib.js';
-import { getUserData, loadPetList, showAlertBox, spinner } from '../util.js';
+import { loadPetList, showAlertBox, spinner } from '../util.js';
 
 const myPetsTemplate = (myPets)  => html`
     <section id="myPets">

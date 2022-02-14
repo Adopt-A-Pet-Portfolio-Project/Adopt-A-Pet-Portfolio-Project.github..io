@@ -1,7 +1,7 @@
-import { addWatchItem, deleteWatchItem, getPetById, getWatchedItem } from '../api/data.js';
+import { addWatchItem, deletePet, deleteWatchItem, getPetById, getWatchedItem, updatePet } from '../api/data.js';
 import { html} from '../lib.js';
 
-const detailsTemplate = (pet, user, owner, watched, onClickWatch) => html`
+const detailsTemplate = (pet, user, owner, watched, onClickWatch, onRemove, onAdopt) => html`
     <section id="details">
                 <div class="pageTitle">
                     <h1>Details</h1>
@@ -54,9 +54,9 @@ const detailsTemplate = (pet, user, owner, watched, onClickWatch) => html`
                 </div>
                 ${owner 
                     ? html`<div id="ownerButtons">
-                    <a class="button" id="editBtn" href="#">Edit</a>
-                    <a class="button" id="removeBtn" href="#">Remove</a>
-                    <a class="button" id="adoptBtn" href="#">Adopted</a>
+                    <a class="button" id="editBtn" href="/edit/${pet.objectId}">Edit</a>
+                    <a @click=${onRemove} class="button" id="removeBtn" href="javascript:void(0)">Remove</a>
+                    <a @click=${onAdopt} class="button ${pet.adopted ? "disabledAnchorBtn" : ''}" id="adoptBtn" href="javascript:void(0)">Adopted</a>
                 </div>`
                     : ''}                
 
@@ -108,7 +108,19 @@ export async function detailsPage(ctx){
     }
     
     window.scrollTo(top);
-    return ctx.render(detailsTemplate(pet, user, owner, watched, onClickWatch));
+    return ctx.render(detailsTemplate(pet, user, owner, watched, onClickWatch, onRemove, onAdopt));
+
+    async function onRemove(e){
+        e.preventDefault();
+        e.target.classList.add('disableClick');
+        await deletePet(id);
+        ctx.page.redirect('/myPets');
+    }
+    async function onAdopt(e){
+        e.preventDefault();
+        await updatePet({adopted: true}, id);
+        ctx.page.redirect('/myPets');
+    }
 
     async function onClickWatch(e){
         e.preventDefault()

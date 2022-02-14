@@ -4,6 +4,7 @@ import { getUserData } from './util.js';
 import { allPage } from './views/all.js';
 import { createPage } from './views/create.js';
 import { detailsPage } from './views/details.js';
+import { editPage } from './views/edit.js';
 import { homePage } from './views/home.js';
 import { loginPage } from './views/login.js';
 import { myPetsPage } from './views/myPets.js';
@@ -28,6 +29,7 @@ page('/myPets', myPetsPage);
 page('/watchlist', watchlistPage);
 page('/add', createPage);
 page('/details/:id', detailsPage);
+page('/edit/:id', editPage);
 
 page.start();
 updateNav();

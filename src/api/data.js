@@ -85,6 +85,7 @@ export async function updatePet(pet, id) {
 }
 
 export async function deletePet(id) {
+
     return api.del('/classes/Pet/' + id);
 }
 
@@ -113,7 +114,6 @@ export async function addWatchItem(userId, petId){
     };
     return api.post('/classes/WatchListItem', newItem);
 }
-
 
 export async function getWatchedItem(userId, petId){
     const query = encodeURIComponent(JSON.stringify({userId, petId}));

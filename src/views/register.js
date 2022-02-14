@@ -1,6 +1,6 @@
 import { register } from '../api/data.js';
 import {html} from '../lib.js';
-import { getUserData, showAlertBox, validateRegistrationData } from '../util.js';
+import { showAlertBox, validateRegistrationData } from '../util.js';
 
 const registerTemplate = (onSubmit, errors) => html`
              <section id="register">

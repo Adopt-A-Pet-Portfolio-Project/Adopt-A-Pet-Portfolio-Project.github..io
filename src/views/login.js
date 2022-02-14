@@ -1,6 +1,6 @@
 import { login } from '../api/data.js';
 import { html } from '../lib.js';
-import { getUserData, showAlertBox, validateLoginData } from '../util.js';
+import { showAlertBox, validateLoginData } from '../util.js';
 
 const loginTemplate = (onSubmit, errors) => html`
             <section id="login">
