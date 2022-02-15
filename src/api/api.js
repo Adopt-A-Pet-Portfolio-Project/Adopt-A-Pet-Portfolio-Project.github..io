@@ -7,6 +7,10 @@ async function request(url, options){
         const response = await fetch(host+url,options);
         if(response.ok!=true){
             const error = await response.json();
+            if(error.code == 209){
+                console.log('yes');
+                clearUserData();
+            }
             console.log(error);
             throw new Error(error.error);
         }

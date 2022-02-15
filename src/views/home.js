@@ -11,9 +11,10 @@ const homeTemplate = (pets, user) => html`
         <hr>
         <div id="homeScreen">
             <section class="homeSection" id="mission">
-                <h2>Our mission</h1>
-                    <p> Connecting animals in need of home with homes in need of animals.</P>
+                <h2>Our mission</h2>
+                    <p> Connecting animals in need of home with homes in need of animals.</P>                    
             </section>
+            
             <section class="homeSection" id="recent">
                 <h2>Most recent animals</h2>
                 <div id="recentPetsWindow">
@@ -21,6 +22,15 @@ const homeTemplate = (pets, user) => html`
                 </div>
 
                 <a class="button" id="seeAllBtn" href="/all">See all</a>
+            </section>
+            <section class="homeSection" id="adoptions">
+                <h2>Our achievements</h2>
+                <a href='/adopted'>
+                    <div id="adoptionsDiv"  title="See our adopted animals">
+                        <div id="beginnings">beginnings</div>
+                        <div id="adoptionsText">Happy <span>endings</span></div>
+                    </div>                   
+                </a>                    
             </section>
         </div>
         

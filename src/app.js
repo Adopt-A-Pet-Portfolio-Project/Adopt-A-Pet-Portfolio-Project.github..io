@@ -1,6 +1,7 @@
 import * as api from './api/data.js';
 import { page, render} from './lib.js'
 import { getUserData } from './util.js';
+import { adoptedPage } from './views/adopted.js';
 import { allPage } from './views/all.js';
 import { createPage } from './views/create.js';
 import { detailsPage } from './views/details.js';
@@ -27,6 +28,7 @@ page('/all', allPage);
 page('/search', searchPage);
 page('/myPets', myPetsPage);
 page('/watchlist', watchlistPage);
+page('/adopted', adoptedPage);
 page('/add', createPage);
 page('/details/:id', detailsPage);
 page('/edit/:id', editPage);

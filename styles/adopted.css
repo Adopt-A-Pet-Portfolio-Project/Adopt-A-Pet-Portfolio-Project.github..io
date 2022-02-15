@@ -1,0 +1,29 @@
+.petContainer {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+}
+
+.adoptedPetArticle {
+    width:95%;
+    display: inline-block;
+    margin: 10px;
+    border-color: rgb(42, 62, 62);
+    border-style: outset;
+    box-shadow: 5px 5px 9px rosybrown;
+}
+
+.adoptedPetImg {
+    height: 250px;
+    width: 250px;
+}
+
+.adoptedPetImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+

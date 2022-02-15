@@ -33,10 +33,14 @@ export async function getAllPets() {
 }
 
 export async function getRecentPets(){
-    const urlString = '/classes/Pet?order=-createdAt&limit=3';
+    const urlString = '/classes/Pet?where=' + encodeURIComponent(JSON.stringify({adopted: false})) +'&order=-createdAt&limit=3';
     return api.get(urlString);
 }
 
+export async function getAdopted(){
+    const query = '?where=' + encodeURIComponent(JSON.stringify({adopted: true})) + '&keys=' + encodeURIComponent(JSON.stringify('img,name,description,objectId')) + '&order=-updatedAt';
+    return api.get('/classes/Pet' + query);
+}
 export async function getPetById(id) {
     return api.get('/classes/Pet/' + id);
 }
