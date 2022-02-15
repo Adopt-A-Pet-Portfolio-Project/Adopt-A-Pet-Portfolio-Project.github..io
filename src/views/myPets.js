@@ -13,10 +13,20 @@ const myPetsTemplate = (myPets)  => html`
                 : ''}                
                 <div id="addBtnDiv"><a class="button" href="/add">Add new</a></div>
                 <div class="petListContainer">
-                    ${myPets.results.lenght!=0
-                    ? loadPetList(myPets.results)
+                    ${myPets.results.some(x=>x.adopted==false)
+                    ? loadPetList(myPets.results.filter(x=>x.adopted==false))
                     : '' }
                 </div>
+
+                ${myPets.results.some(x=>x.adopted==true)
+                    ? html`<hr>
+                            <div class="noContent">
+                                Archived
+                            </div>
+                            <div class="petListContainer">
+                            ${loadPetList(myPets.results.filter(x=>x.adopted==true))}
+                            </div>`
+                    : ''}                
             </section>`;
 
 export function myPetsPage(ctx){

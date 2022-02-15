@@ -136,7 +136,9 @@ export function loadPetList(pets) {
 
 export function buildSearchQuery(city, category, gender){
     
-    const queryObject = {};
+    const queryObject = {
+        adopted : false
+    };
     if(city!=''){
         queryObject.city = {"$regex": "(?i)"+city};
     }

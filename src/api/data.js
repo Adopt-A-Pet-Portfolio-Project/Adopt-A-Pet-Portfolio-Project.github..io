@@ -28,7 +28,8 @@ export async function getAllPets() {
     //aQuery.select(['name', 'age', 'gender', 'img', 'category', 'objectId']);
     //const results = await aQuery.find();
     //console.log(`ParseObjects found: ${JSON.stringify(results)}`);
-    return api.get('/classes/Pet');
+    const query = '?where=' + encodeURIComponent(JSON.stringify({adopted: false})) + '&keys=' + encodeURIComponent(JSON.stringify('name,age,gender,img,city,category,objectId'));
+    return api.get('/classes/Pet'+query);
 }
 
 export async function getRecentPets(){
@@ -44,7 +45,7 @@ export async function getPetsByAuthor(userId){
         author: createPointer('_User', userId)
     };
     const query = buildAuthorQuery(author);
-    return api.get('/classes/Pet?where=' + query + '&keys='+encodeURIComponent(JSON.stringify('name,age,gender,img,city,objectId')));
+    return api.get('/classes/Pet?where=' + query + '&keys=' + encodeURIComponent(JSON.stringify('name,age,gender,img,city,adopted,objectId')));
 }
 
 export async function getPetsFromSearch(city, category, gender){
@@ -93,7 +94,8 @@ export async function getWatchedPets(ids){
     const obj = {
         objectId: {
             "$in": ids
-        }
+        },
+        adopted: false
     }
     const query = encodeURIComponent(JSON.stringify(obj));
     return api.get('/classes/Pet?where=' + query);
