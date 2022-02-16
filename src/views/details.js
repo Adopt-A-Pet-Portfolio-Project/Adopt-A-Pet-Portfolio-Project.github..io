@@ -1,7 +1,7 @@
 import { addWatchItem, deletePet, deleteWatchItem, getPetById, getWatchedItem, updatePet } from '../api/data.js';
 import { html} from '../lib.js';
 
-const detailsTemplate = (pet, user, owner, watched, onClickWatch, onRemove, onAdopt) => html`
+const detailsTemplate = (pet, user, owner, watched, onWatch, onRemove, onAdopt) => html`
     <section id="details">
                 <div class="pageTitle">
                     <h1>Details</h1>
@@ -19,9 +19,9 @@ const detailsTemplate = (pet, user, owner, watched, onClickWatch, onRemove, onAd
                             ${owner || !user
                                 ? '' 
                                 : html`
-                                    <a @click=${onClickWatch} style="display:${watched ? "block" : "none"}" title="Remove from Watch List" id="removeFromWatchList" href="javascript:void(0)">
+                                    <a @click=${onWatch} style="display:${watched ? "block" : "none"}" title="Remove from Watch List" id="removeFromWatchList" href="javascript:void(0)">
                                     <i class="fas fa-eye-slash"></i></a>
-                                    <a @click=${onClickWatch} style="display:${watched ? "none" : "block"}" title="Add to Watch List" id="addToWatchList" href="javascript:void(0)">
+                                    <a @click=${onWatch} style="display:${watched ? "none" : "block"}" title="Add to Watch List" id="addToWatchList" href="javascript:void(0)">
                                     <i class="fas fa-eye"></i></a>
                                 `}                            
                         </div>
@@ -108,7 +108,7 @@ export async function detailsPage(ctx){
     }
     
     window.scrollTo(top);
-    return ctx.render(detailsTemplate(pet, user, owner, watched, onClickWatch, onRemove, onAdopt));
+    return ctx.render(detailsTemplate(pet, user, owner, watched, onWatch, onRemove, onAdopt));
 
     async function onRemove(e){
         e.preventDefault();
@@ -119,10 +119,10 @@ export async function detailsPage(ctx){
     async function onAdopt(e){
         e.preventDefault();
         await updatePet({adopted: true}, id);
-        ctx.page.redirect('/myPets');
+        ctx.page.redirect('/adopted');
     }
 
-    async function onClickWatch(e){
+    async function onWatch(e){
         e.preventDefault()
         const target = e.target.parentNode;
         target.classList.add('disableClick');

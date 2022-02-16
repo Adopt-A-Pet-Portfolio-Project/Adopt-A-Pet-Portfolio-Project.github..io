@@ -116,11 +116,16 @@ export function createPage(ctx){
             btn.disabled=false;
         } else {
             showAlertBox('Please, wait...');
-            await createPet(newPetData);
-            showAlertBox('Pet added successfully.');
-            e.target.reset();
-            btn.disabled=false;
-            ctx.page.redirect('/myPets');
+            try {
+                await createPet(newPetData);
+                showAlertBox('Pet added successfully.');
+                btn.disabled=false;
+                e.target.reset();
+                ctx.page.redirect('/myPets');
+            } catch (error) {
+                showAlertBox('Unsuccessful action. Please try again.');
+                btn.disabled=false;
+            }            
         }
     }
 }

@@ -37,7 +37,7 @@ const searchResultsTemplate = (searchResults) => html`
             </div>` 
         : html`
             <div class="noContent">
-                ${searchResults.results.length} pets found.
+                ${searchResults.results.length} ${searchResults.results.length==1 ? 'pet' : 'pets'} found.
             </div>
             <div class="petListContainer">
             ${loadPetList(searchResults.results)}

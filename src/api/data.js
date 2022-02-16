@@ -75,7 +75,7 @@ export async function createPet(pet) {
     myNewObject.set('adopted', false);
     myNewObject.set('img', new Parse.File(pet.img.name, pet.img));
     try {
-        const result = await myNewObject.save();
+        const result = await myNewObject.save(null, {sessionToken: getUserData().token});
         // Access the Parse Object attributes using the .GET method
         console.log('Pet created', result);
 

@@ -1,6 +1,6 @@
 import { getRecentPets } from '../api/data.js';
-import { html } from '../lib.js';
-import { getUserData } from '../util.js';
+import { html, until } from '../lib.js';
+import { getUserData, spinner } from '../util.js';
 
 const homeTemplate = (pets, user) => html`
     <section id="home">
@@ -18,7 +18,7 @@ const homeTemplate = (pets, user) => html`
             <section class="homeSection" id="recent">
                 <h2>Most recent animals</h2>
                 <div id="recentPetsWindow">
-                    ${pets.map(petCardTemplate)}
+                    ${until((async () => loadRecentPets(await pets))(), spinner()) }
                 </div>
 
                 <a class="button" id="seeAllBtn" href="/all">See all</a>
@@ -44,6 +44,10 @@ const homeTemplate = (pets, user) => html`
             : ''}
 
     </section>`;
+
+function loadRecentPets(pets){
+    return pets.results.map(petCardTemplate);
+}
 
 const petCardTemplate = (pet) => html`
     <article class="petPreview" title='Click to see details'>
@@ -75,7 +79,7 @@ const petCardTemplate = (pet) => html`
 export async function homePage(ctx) {
     ctx.switchTabs('');
     const user = getUserData();
-    const recentPets = await getRecentPets();
-    return ctx.render(homeTemplate(recentPets.results, user));
+    const recentPets = getRecentPets();
+    return ctx.render(homeTemplate(recentPets, user));
 
 }
