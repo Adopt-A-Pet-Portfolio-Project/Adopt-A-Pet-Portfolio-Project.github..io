@@ -1,7 +1,7 @@
 import { addWatchItem, deletePet, deleteWatchItem, getPetById, getWatchedItem, updatePet } from '../api/data.js';
 import { html} from '../lib.js';
 
-const detailsTemplate = (pet, user, owner, watched, onWatch, onRemove, onAdopt) => html`
+const detailsTemplate = (pet, user, owner, watched, ViewImageWindow, onWatch, onRemove, onAdopt) => html`
     <section id="details">
                 <div class="pageTitle">
                     <h1>Details</h1>
@@ -13,9 +13,9 @@ const detailsTemplate = (pet, user, owner, watched, onWatch, onRemove, onAdopt) 
                 <div id="petDetails">
                     <article>                        
                         <div id="petDetailsImg">
-                            <a href=${pet.img.url}>
-                                <img src=${pet.img.url}>
-                            </a>
+                            
+                                <img @click=${() => ViewImageWindow(pet.img.url)} src=${pet.img.url}>
+                            
                             ${owner || !user
                                 ? '' 
                                 : html`
@@ -108,7 +108,7 @@ export async function detailsPage(ctx){
     }
     
     window.scrollTo(top);
-    return ctx.render(detailsTemplate(pet, user, owner, watched, onWatch, onRemove, onAdopt));
+    return ctx.render(detailsTemplate(pet, user, owner, watched, ViewImageWindow, onWatch, onRemove, onAdopt));
 
     async function onRemove(e){
         e.preventDefault();
@@ -142,5 +142,19 @@ export async function detailsPage(ctx){
             otherEl.style.display = 'block';
         }
         target.classList.remove('disableClick');
+    }
+
+    function ViewImageWindow(url){
+        const element = document.createElement('div');
+        element.classList.add('overlay');
+        element.innerHTML = `
+        <div id="imgBox">
+        <img src=${url}>
+        <button id="closeBtn" class="button">
+        X
+        </button>
+        </div>`;
+        document.body.appendChild(element);
+        document.querySelector('#closeBtn').addEventListener('click', () => {element.remove()});
     }
 }
