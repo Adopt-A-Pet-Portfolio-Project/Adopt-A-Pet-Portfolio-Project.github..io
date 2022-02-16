@@ -12,10 +12,8 @@ const detailsTemplate = (pet, user, owner, watched, ViewImageWindow, onWatch, on
                 </h2>
                 <div id="petDetails">
                     <article>                        
-                        <div id="petDetailsImg">
-                            
-                                <img @click=${() => ViewImageWindow(pet.img.url)} src=${pet.img.url}>
-                            
+                        <div id="petDetailsImg">                            
+                            <img @click=${() => ViewImageWindow(pet.img.url)} title="View full image" src=${pet.img.url}>                            
                             ${owner || !user
                                 ? '' 
                                 : html`
