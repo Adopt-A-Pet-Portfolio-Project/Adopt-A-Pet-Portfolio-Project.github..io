@@ -29,7 +29,7 @@ const adoptedPetTemplate = (pet) => html`
             ${pet.name}
         </div>
         <div class="adoptedPetStory">
-           ${pet.description}
+           <p>${pet.description}</p>
         </div>
     </article>`
 

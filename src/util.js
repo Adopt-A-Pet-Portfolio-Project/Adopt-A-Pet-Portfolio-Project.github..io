@@ -97,7 +97,7 @@ export function showAlertBox(message){
     }
 }
 
-export const spinner = () => html`<p>Please, wait &hellip;</p>`;
+export const spinner = () => html`<p>Loading, please wait... &hellip;</p>`;
 
 export function loadPetList(pets) {
 
