@@ -1,6 +1,6 @@
 import { createPet } from '../api/data.js';
 import {html} from '../lib.js';
-import { showAlertBox, validatePetData } from '../util.js';
+import { getPetFromForm, showAlertBox, validatePetData } from '../util.js';
 
 const createTemplate = (onSubmit, errors) => html`
     <section id="create">
@@ -76,39 +76,10 @@ export function createPage(ctx){
         e.preventDefault();
         const btn = document.getElementById('submitBtn');
         btn.disabled = true;
-        const formData = new FormData(e.target);
 
-        const name = formData.get('name').trim();
-        const img = formData.get('img');
-        const ageNum = formData.get('age').trim();
-        const ageUnits = formData.get('ageUnit');
-        const age = ageNum + ' ' + ageUnits;    
-        const weightNum = formData.get('weight').trim();
-        const weightUnits = formData.get('weightUnit');
-        const weight = weightNum + ' ' + weightUnits;
-        const gender = formData.get('gender');
-        const vaccinated = formData.get('vaccinated') == 'true' ? true : false;
-        const neutered = formData.get('neutered') == 'true' ? true : false;
-        const city = formData.get('city').trim();
-        const category = formData.get('category');
-        const description = formData.get('description').trim();
-        const phone = formData.get('phone');
+        const newPetData = getPetFromForm(e.target);
 
-        const newPetData = {
-            name,
-            img,
-            age,
-            weight,
-            gender,
-            vaccinated,
-            neutered,
-            city,
-            description,
-            category,
-            phone,
-        }
-
-        const errors = validatePetData(newPetData);
+        const errors = validatePetData(newPetData, e.target.id);
 
         if(Object.keys(errors).length != 0){
             ctx.render(createTemplate(onSubmit, errors))

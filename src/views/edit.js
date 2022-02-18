@@ -1,14 +1,16 @@
-import { getPetById } from '../api/data.js';
+import { getPetById, updatePet, updatePetWithNewImg } from '../api/data.js';
 import {html} from '../lib.js';
+import { getPetFromForm, showAlertBox, validatePetData } from '../util.js';
 
-const editTemplate = (pet) => html`
+const editTemplate = (pet, onSubmit, errors) => html`
     <section id="edit">
                 <div class="pageTitle">
                     <h1>Edit Pet Information</h1>
                 </div>
                 <hr>
 
-                <form id="editForm">
+                <form @submit=${onSubmit} id="editForm">
+                    ${(errors && errors.name) ? html`<div class="errorDiv">${errors.name}</div>` : ''}
                     <label>Name: <input type="text" name="name" placeholder="Pet name" .value=${pet.name}></label>
                     <label>Category: <fieldset class="formRadioBtns">
                             <input type="radio" name="category" value="dog" ?checked=${pet.category=="dog"} ><span> Dog</span>
@@ -16,16 +18,20 @@ const editTemplate = (pet) => html`
                             <input type="radio" name="category" value="other" ?checked=${pet.category=="other"} ><span> Other</span>
                         </fieldset>
                     </label>
+                    ${(errors && errors.img) ? html`<div class="errorDiv">${errors.img}</div>` : ''}
+                    <div class="messageDiv">If you are happy with the current image you do not need to upload a file.</div>
                     <label>Image: <input type="file" name="img" placeholder="Image URL"></label>
+                    ${(errors && errors.age) ? html`<div class="errorDiv">${errors.age}</div>` : ''}
                     <label>Age: <input type="text" id="ageField" name="age" .value=${pet.ageNum}>
-                        <select id="ageUnit">
+                        <select id="ageUnit" name="ageUnit">
                             <option value="days" ?selected=${pet.ageUnit=="days"}>Days</option>
                             <option value="months" ?selected=${pet.ageUnit=="months"}>Months</option>
                             <option value="years" ?selected=${pet.ageUnit=="years"}>Years</option>
                         </select>
                     </label>
+                    ${(errors && errors.weight) ? html`<div class="errorDiv">${errors.weight}</div>` : ''}
                     <label>Weight: <input type="text" id="weightField" name="weight" .value=${pet.weightNum}>
-                        <select id="weightUnit">
+                        <select id="weightUnit" name="weightUnit">
                             <option value="gr" ?selected=${pet.weightUnit=="gr"}>kg</option>
                             <option value="kg" ?selected=${pet.weightUnit=="gr"}>gr</option>
                         </select>
@@ -45,31 +51,77 @@ const editTemplate = (pet) => html`
                             <input type="radio" name="neutered" value="false" ?checked=${!pet.neutered}><span> No</span>
                         </fieldset>
                     </label>
+                    ${(errors && errors.city) ? html`<div class="errorDiv">${errors.city}</div>` : ''}
                     <label>City: <input type="text" name="city"
                             placeholder="Enter the current location of the pet" .value=${pet.city}>
                     </label>
+                    ${(errors && errors.phone) ? html`<div class="errorDiv">${errors.phone}</div>` : ''}
                     <label>Phone: <input type="tel" name="phone"
                             placeholder="Enter phone number" .value=${pet.phone}>
                     </label>
+                    ${(errors && errors.description) ? html`<div class="errorDiv">${errors.description}</div>` : ''}
                     <label class="ml">Story: <textarea name="description"
                             placeholder="Shortly share the pet's story and add any additional information that might be important."
                             .value=${pet.description}>
                         </textarea>
                     </label>
-                    <input class="button" type="submit" value="Update">
+                    <input id="submitBtn" class="button" type="submit" value="Update">
                 </form>
 
                 <hr>
             </section>`;
 
 export async function editPage(ctx){
-    console.log('in edit page');
+
     const id = ctx.params.id;
-    const pet = await getPetById(id);
-    let [ageNum, ageUnit] = [...pet.age.split(' ')];
-    let [weightNum, weightUnit] = [...pet.weight.split(' ')];
-    Object.assign(pet, {ageNum, ageUnit, weightNum, weightUnit});
-    console.log(pet);
-    console.log(pet.category=="cat");
-    return ctx.render(editTemplate(pet));
+    let pet = await getPetById(id);
+    pet = addAgeAndWeightProperties(pet);
+
+    return ctx.render(editTemplate(pet, onSubmit));
+
+    async function onSubmit(e){
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+
+        let newPetData = getPetFromForm(e.target);
+
+        const errors = validatePetData(newPetData, e.target.id);
+
+        if(Object.keys(errors).length != 0){
+            newPetData = addAgeAndWeightProperties(newPetData);
+            console.log(newPetData);
+            ctx.render(editTemplate(newPetData, onSubmit, errors))
+            showAlertBox('Please enter valid data');
+            btn.disabled=false;
+        } else {
+            showAlertBox('Please, wait...');
+            newPetData.adopted=pet.adopted;
+            newPetData.author=pet.author;
+            console.log(newPetData);
+            try {
+                if(newPetData.img.size==0){
+                    delete newPetData.img;
+                    await updatePet(newPetData, id);
+                }
+                else{
+                    await updatePetWithNewImg(newPetData, id);
+                }
+                showAlertBox('Pet updated successfully.');
+                btn.disabled=false;
+                e.target.reset();
+                ctx.page.redirect(`/details/${id}`);
+            } catch (error) {
+                showAlertBox('Unsuccessful action. Please try again.');
+                btn.disabled=false;
+            }            
+        }
+    }
+
+    function addAgeAndWeightProperties(petObject){
+        let [ageNum, ageUnit] = [...petObject.age.split(' ')];
+        let [weightNum, weightUnit] = [...petObject.weight.split(' ')];
+        Object.assign(petObject, {ageNum, ageUnit, weightNum, weightUnit});
+        return petObject;
+    }
 }

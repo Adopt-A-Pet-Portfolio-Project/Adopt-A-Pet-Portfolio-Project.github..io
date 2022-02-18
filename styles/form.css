@@ -81,6 +81,16 @@ form div.errorDiv{
     font-size: 14pt;
 }
 
+form div.messageDiv {
+    display: block;
+    text-align: center;
+    color: #462323;
+    font-size: 11pt;
+    background-color: rosybrown;
+    margin-left: 150px;
+    margin-right: 100px;
+}
+
 .alertBox {
     position: fixed;
     display: flex;

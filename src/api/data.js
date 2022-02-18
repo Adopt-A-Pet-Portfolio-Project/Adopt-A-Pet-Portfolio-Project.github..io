@@ -1,4 +1,4 @@
-import { buildSearchQuery, buildAuthorQuery, getUserData } from '../util.js';
+import { buildSearchQuery, buildAuthorQuery, getUserData, showAlertBox } from '../util.js';
 import * as api from './api.js';
 
 export const login = api.login;
@@ -87,6 +87,34 @@ export async function createPet(pet) {
 
 export async function updatePet(pet, id) {
     return api.put('/classes/Pet/' + id, pet);
+}
+
+export async function updatePetWithNewImg(pet, id){
+    const query = new Parse.Query('Pet');
+    try {
+      const object = await query.get(id);
+      console.log(object);
+      object.set('name', pet.name);
+      object.set('age', pet.age);
+      object.set('city', pet.city);
+      object.set('vaccinated', pet.vaccinated);
+      object.set('neutered', pet.neutered);
+      object.set('description', pet.description);
+      object.set('author', pet.author);
+      object.set('adopted', pet.adopted);
+      object.set('gender', pet.gender);
+      object.set('weight', pet.weight);
+      object.set('category', pet.category);
+      object.set('phone', pet.phone);
+      object.set('img', new Parse.File(pet.img.name, pet.img));
+      try {
+        const response = await object.save(null, {sessionToken: getUserData().token});
+      } catch (error) {
+          showAlertBox(error.message);
+        }
+      } catch (error) {
+        showAlertBox(error.message);
+      }
 }
 
 export async function deletePet(id) {
