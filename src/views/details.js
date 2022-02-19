@@ -1,7 +1,8 @@
 import { addWatchItem, deletePet, deleteWatchItem, getPetById, getWatchedItem, updatePet } from '../api/data.js';
-import { html} from '../lib.js';
+import { html, render} from '../lib.js';
+import { renderComments } from './comments.js';
 
-const detailsTemplate = (pet, user, owner, watched, ViewImageWindow, onWatch, onRemove, onAdopt) => html`
+const detailsTemplate = (pet, user, owner, watched, ViewImageWindow, onWatch, onRemove, onAdopt, toggleComments) => html`
     <section id="details">
                 <div class="pageTitle">
                     <h1>Details</h1>
@@ -59,34 +60,11 @@ const detailsTemplate = (pet, user, owner, watched, ViewImageWindow, onWatch, on
                     : ''}                
 
                 <h2>
-                    Comments
+                    Comments <span @click = ${toggleComments} class="showHideIcon show"><i class="fas fa-angle-down"></i></span>
                 </h2>
                 <div id="comments">
-                    <div class="comment">
-                        <h5 class="commentAuthor">Username</h5>
-                        <p class="date">25/01/2020</p>
-                        <p class="commentText">Is there any information about the parents?</p>
-                    </div>
-                    <div class="comment">
-                        <h5 class="commentAuthor">Other guy</h5>
-                        <p class="date">25/01/2020</p>
-                        <p class="commentText">Only about the mother. She is german shepherd.</p>
-                    </div>
-                    <div class="noContent">There are no comments about this pet.</div>
 
-                    <div>
-                        <form id="newComment">
-                            <textarea name="commentText" placeholder="Type your comment here"></textarea>
-                            <input type="submit" class="button" value="Add comment">
-                        </form>
-                    </div>
-                    <div class="notSigned">
-                        <h4>To add a comment about this pet, please
-                            <a href="/login">login</a> to your account or <a href="/register">register.</a>
-                        </h4>
-                    </div>
                 </div>
-
             </section>`
 
 export async function detailsPage(ctx){
@@ -106,7 +84,7 @@ export async function detailsPage(ctx){
     }
     
     window.scrollTo(top);
-    return ctx.render(detailsTemplate(pet, user, owner, watched, ViewImageWindow, onWatch, onRemove, onAdopt));
+    return ctx.render(detailsTemplate(pet, user, owner, watched, ViewImageWindow, onWatch, onRemove, onAdopt, toggleComments));
 
     async function onRemove(e){
         e.preventDefault();
@@ -140,6 +118,21 @@ export async function detailsPage(ctx){
             otherEl.style.display = 'block';
         }
         target.classList.remove('disableClick');
+    }
+
+    function toggleComments(e) {
+        let span = e.target.parentNode;
+        let active = span.classList.contains('show');
+        const commentsContainer = document.getElementById('comments');
+        if(active){
+            span.classList.remove('show');
+            span.innerHTML='<i class="fas fa-angle-up"></i>';
+            renderComments(id, user, commentsContainer);
+        } else{
+            span.classList.add('show');
+            span.innerHTML='<i class="fas fa-angle-down"></i>';
+            render('', commentsContainer);
+        }
     }
 
     function ViewImageWindow(url){

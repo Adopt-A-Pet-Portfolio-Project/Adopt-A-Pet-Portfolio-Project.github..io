@@ -155,5 +155,21 @@ export async function getWatchedItem(userId, petId){
 }
 
 export async function deleteWatchItem(id){
-    return api.del('/classes/WatchListItem/'+id);
+    return api.del('/classes/WatchListItem/' + id);
+}
+
+//  Comments queries  //
+
+export async function getCommentById(id){
+    return api.get('/classes/Comment/' + id + '?include=author');
+}
+
+export async function getCommentsByPetId(petId){
+    const query = encodeURIComponent(JSON.stringify({petId})) + '&include=author';
+    return api.get('/classes/Comment?where=' + query);
+}
+
+export async function addComment(comment){
+    addAuthor(comment);
+    return api.post('/classes/Comment', comment);
 }

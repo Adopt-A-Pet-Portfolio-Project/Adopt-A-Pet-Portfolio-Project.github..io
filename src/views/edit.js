@@ -90,7 +90,6 @@ export async function editPage(ctx){
 
         if(Object.keys(errors).length != 0){
             newPetData = addAgeAndWeightProperties(newPetData);
-            console.log(newPetData);
             ctx.render(editTemplate(newPetData, onSubmit, errors))
             showAlertBox('Please enter valid data');
             btn.disabled=false;
@@ -98,7 +97,6 @@ export async function editPage(ctx){
             showAlertBox('Please, wait...');
             newPetData.adopted=pet.adopted;
             newPetData.author=pet.author;
-            console.log(newPetData);
             try {
                 if(newPetData.img.size==0){
                     delete newPetData.img;

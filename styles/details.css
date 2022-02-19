@@ -101,6 +101,18 @@
 
 }
 
+.showHideIcon {
+    margin-left:15px;
+}
+
+.showHideIcon:hover {
+    cursor: pointer;
+}
+
+.showHideIcon i {
+    font-size: 22pt;
+}
+
 .comment {
     margin-bottom: 20px;
 }
